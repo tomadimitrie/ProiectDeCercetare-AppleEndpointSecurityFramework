@@ -16,7 +16,7 @@
 		7772E336246740A300919474 /* libEndpointSecurity.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7729C8712312F1C600E9CE0D /* libEndpointSecurity.tbd */; };
 		77F4EC092467415A00B58877 /* com.toma.endpointsecuritysample.extension.systemextension in Embed System Extension */ = {isa = PBXBuildFile; fileRef = 7772E32524673FCA00919474 /* com.toma.endpointsecuritysample.extension.systemextension */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		77F4EC0D246748C800B58877 /* libbsm.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F4EC0C246748C800B58877 /* libbsm.tbd */; };
-		E21AAB2E292EF163004DCF23 /* notify_demo.c in Sources */ = {isa = PBXBuildFile; fileRef = 359840BD247DEA20000B8B8A /* notify_demo.c */; };
+		E23CC18E292FE69F00C71856 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = E23CC18D292FE69F00C71856 /* main.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,8 +45,6 @@
 
 /* Begin PBXFileReference section */
 		22968C458EF96BCA72C1DA4B /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
-		359840BD247DEA20000B8B8A /* notify_demo.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = notify_demo.c; sourceTree = "<group>"; };
-		359840BF247DEA58000B8B8A /* auth_demo.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = auth_demo.c; sourceTree = "<group>"; };
 		7729C84D2312EAE100E9CE0D /* SampleEndpointApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleEndpointApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7729C8502312EAE100E9CE0D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7729C8512312EAE100E9CE0D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -68,6 +66,7 @@
 		77F4EC0C246748C800B58877 /* libbsm.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbsm.tbd; path = usr/lib/libbsm.tbd; sourceTree = SDKROOT; };
 		AEF809140B93027DE914EC4A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B87C8F70105713202B8A5818 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		E23CC18D292FE69F00C71856 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,10 +152,9 @@
 		7772E32824673FCA00919474 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				359840BD247DEA20000B8B8A /* notify_demo.c */,
-				359840BF247DEA58000B8B8A /* auth_demo.c */,
 				7772E32E24673FCA00919474 /* Info.plist */,
 				7772E32F24673FCA00919474 /* Extension.entitlements */,
+				E23CC18D292FE69F00C71856 /* main.c */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -286,7 +284,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E21AAB2E292EF163004DCF23 /* notify_demo.c in Sources */,
+				E23CC18E292FE69F00C71856 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
