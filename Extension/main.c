@@ -56,8 +56,19 @@ handle_exec(es_client_t *client, const es_message_t *msg)
     // However this isn't a very restrictive policy and could inadvertently lead to
     // denying more executions than intended. In general, you should consider using
     // more restrictive policies like inspecting the process's CDHash instead.
+    kern_return_t status = KERN_FAILURE;
     static const char signing_id_to_block[] = "com.apple.TextEdit";
     es_string_token_t *current_signing_id = &msg->event.exec.target->signing_id;
+    
+    pid_t pid = audit_token_to_pid(msg->event.exec.target->audit_token);
+    
+    mach_port_t task;
+    status = task_for_pid(mach_task_self(), pid, &task);
+    if (status != KERN_SUCCESS) {
+        os_log_error(OS_LOG_DEFAULT, "task_for_pid failed with %{public}d", status);
+    } else {
+        os_log_info(OS_LOG_DEFAULT, "task_for_pid success: %d", task);
+    }
     
     if ((current_signing_id->length == sizeof(signing_id_to_block) - 1) &&
             (strncmp(current_signing_id->data, signing_id_to_block, sizeof(signing_id_to_block)) == 0)) {
@@ -192,3 +203,4 @@ main(int argc, char *argv[])
 
     return 0;
 }
+
