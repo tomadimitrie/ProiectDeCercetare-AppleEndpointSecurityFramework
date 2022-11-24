@@ -3,6 +3,7 @@
 #include <bsm/libbsm.h>
 #include <stdio.h>
 #include <os/log.h>
+#include <Security/Authorization.h>
 
 static dispatch_queue_t g_event_queue = NULL;
 
@@ -15,6 +16,27 @@ init_dispatch_queue(void)
             DISPATCH_QUEUE_CONCURRENT, QOS_CLASS_USER_INITIATED, 0);
 
     g_event_queue = dispatch_queue_create("event_queue", queue_attrs);
+}
+
+static void
+authorize()
+{
+    OSStatus stat;
+    AuthorizationItem taskport_item[] = {{"system.privilege.taskport:"}};
+    AuthorizationRights rights = {1, taskport_item}, *out_rights = NULL;
+    AuthorizationRef author;
+    
+    AuthorizationFlags auth_flags = kAuthorizationFlagExtendRights | kAuthorizationFlagPreAuthorize | kAuthorizationFlagInteractionAllowed | ( 1 << 5);
+    
+    stat = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment,auth_flags,&author);
+    if (stat != errAuthorizationSuccess) {
+        os_log_error(OS_LOG_DEFAULT, "AuthorizationCreate failed with %{public}d", stat);
+    }
+    
+    stat = AuthorizationCopyRights(author, &rights, kAuthorizationEmptyEnvironment, auth_flags,&out_rights);
+    if (stat != errAuthorizationSuccess) {
+        os_log_error(OS_LOG_DEFAULT, "AuthorizationCopyRights failed with %{public}d", stat);
+    }
 }
 
 static bool
@@ -174,6 +196,8 @@ handle_event(es_client_t *client, const es_message_t *msg)
 int
 main(int argc, char *argv[])
 {
+    authorize();
+    
     init_dispatch_queue();
 
     es_client_t *client;
@@ -203,4 +227,3 @@ main(int argc, char *argv[])
 
     return 0;
 }
-
